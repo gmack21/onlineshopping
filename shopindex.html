@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Shopaholics!</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
+
+ 
+</head>
+
+<body>
+
+<div class = "container">
+    <div class = "row">
+    <div id = "regdisplay" class = "col-xs-2"></div>
+    <div id = "display" class = "col-xs-10"></div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+    <script>
+
+    function Product ()
+        {
+           this.product_data = 
+        [           
+            ['id_1','prod_name1','prod_desc1','prod_img1','prod_price1'], ['id_2','prod_name2','prod_desc2','prod_img2','prod_price2'], ['id_3','prod_name3','prod_desc3','prod_img3','prod_price3'], ['id_4','prod_name4','prod_desc4','prod_img4','prod_price4'], ['id_5','prod_name5','prod_desc5','prod_img5','prod_price5'], ['id_6','prod_name6','prod_desc6','prod_img6','prod_price6'],
+         ]
+           this.checkoutArray = [];
+           this.userArr = [];
+           
+        };
+        
+Product.prototype.buildReg = function ()
+    {
+        var form = ' ';
+   
+    form += '<h2>Register for Shopaholics.com!</h2>';
+    form += '<label>First Name</label><br/><input class = "form-control" type = "text" id ="fname"/><br/>'; 
+    form += '<label>Last Name</label><br/><input class = "form-control" type = "text" id ="lname"/><br/>';
+    form += '<label>Email</label><br/><input class = "form-control" type = "text" id ="email"/><br/>';
+    form += '<label>UserName</label><br/><input class = "form-control" type = "text" id ="username"/><br/>';
+    form += '<label>Age</label><br/><input class = "form-control" type = "text" id ="age"/><br/>';
+    form += '<button class = "btn btn-primary" onclick="">Register</button>';
+ 
+        return form;
+    }
+
+Product.prototype.showReg = function ()
+{
+    var newform = this.buildReg();
+    document.getElementById("regdisplay").innerHTML = newform;
+}
+    
+Product.prototype.getRegInfo = function()
+        {
+        var name = document.getElementById('fname').value;
+        var lname =document.getElementById('lname').value;
+        var email = document.getElementById('email').value;
+        var username = document.getElementById('username').value;
+        var age = document.getElementById('age').value;
+        
+        userArr.push('name','lname','email','username','age');
+        
+        if (typeof(Storage) !== "undefined") 
+           { localStorage.setItem("userInfo", this.userArr);}
+        
+        }  
+    
+Product.prototype.buildPage = function()
+{
+    var arr = [];
+    for(var i=0; i<this.product_data.length; i++)
+        {
+            var content = '';
+             
+ content += '<div class="col-md-3 col-sm-6 col-md-offset-1">';
+ content += '<div class="panel panel-default pd">';
+ content += '<div class="panel-body">';
+ content += '<img src="'+this.product_data[i][3]+'" alt="...">';
+ content += '<div class="caption">';
+ content += '<h3>'+this.product_data[i][1]+'</h3>';
+ content += '<p>'+this.product_data[i][2]+'</p>';
+ content += '<p>'+this.product_data[i][4]+'</p>';
+ content += '<button class = "btn btn-primary">';
+ content += 'Add to Cart</button>';
+ content += '<input type ="text"/><p></p>';            
+ content += '</div>';
+ content += '</div>';
+ content += '</div>';
+ content += '</div>';
+            
+            arr.push(content);
+        }
+    this.showPage(arr);
+}
+ 
+Product.prototype.showPage = function (arr)
+{
+    document.getElementById("display").innerHTML = ' ';
+    for(var i=0; i< arr.length; i++)
+        {
+            document.getElementById("display").innerHTML += arr[i];
+        }
+}
+    
+
+var page = new Product();
+var reg = page.showReg();
+var show = page.buildPage();
+    </script>
+</body>
+</html>
